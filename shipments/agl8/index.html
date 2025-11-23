@@ -14,13 +14,13 @@
 <meta content="https://www.agroverse.shop/shipments/agl8" property="og:url"/>
 <meta content="AGL8 Shipment | Paulo's Farm - La do Sitio | Agroverse" property="og:title"/>
 <meta content="330 kg of cacao almonds from Paulo's La do Sitio farm in Pará, Brazil. Part of the CEPOTX cooperative." property="og:description"/>
-<meta content="https://www.agroverse.shop/assets/images/farms/paulo.jpg" property="og:image"/>
+<meta content="https://www.agroverse.shop/assets/images/farms/paulo_photo.jpg" property="og:image"/>
 <!-- Twitter -->
 <meta content="summary_large_image" property="twitter:card"/>
 <meta content="https://www.agroverse.shop/shipments/agl8" property="twitter:url"/>
 <meta content="AGL8 Shipment | Paulo's Farm - La do Sitio | Agroverse" property="twitter:title"/>
 <meta content="330 kg of cacao almonds from Paulo's La do Sitio farm in Pará, Brazil. Part of the CEPOTX cooperative." property="twitter:description"/>
-<meta content="https://www.agroverse.shop/assets/images/farms/paulo.jpg" property="twitter:image"/>
+<meta content="https://www.agroverse.shop/assets/images/farms/paulo_photo.jpg" property="twitter:image"/>
 <!-- Favicon -->
 <link href="../../assets/images/logo/agroverse-logo.jpeg" rel="icon" type="image/jpeg"/>
 <!-- Google Fonts -->
@@ -693,7 +693,58 @@
             .logo img {
                 height: 40px;
             }
-        }</style>
+        }
+        
+        /* Post Navigation */
+        .post-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 3rem 0 2rem;
+            padding: 2rem 0;
+            border-top: 2px solid var(--color-bg-light);
+            border-bottom: 2px solid var(--color-bg-light);
+            gap: 2rem;
+        }
+        
+        .nav-item {
+            flex: 1;
+        }
+        
+        .nav-item.nav-next {
+            text-align: right;
+        }
+        
+        .nav-link {
+            display: inline-block;
+            color: var(--color-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-link:hover {
+            color: var(--color-primary);
+        }
+        
+        @media (max-width: 768px) {
+            .post-navigation {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .nav-item.nav-next {
+                text-align: left;
+            }
+        }
+        
+        
+        .nav-label {
+            font-weight: 600;
+        }
+        </style>
 </head>
 <body>
 <header>
@@ -757,7 +808,7 @@
 </div>
 <div class="shipment-grid">
 <div>
-<img alt="Paulo - La do Sitio Farm" class="shipment-image" src="../../assets/images/farms/paulo.jpg"/>
+<img alt="Paulo - La do Sitio Farm" class="shipment-image" src="../../assets/images/farms/paulo_photo.jpg"/>
 <h2>AGL8</h2>
 <p style="color: var(--color-text-light); line-height: 1.8;">
                     330 kg of cacao almonds from small-scale farmers in Pará, Brazil, manufactured under the CEPOTX cooperative. This shipment represents the commitment of Paulo and his family at La do Sitio, an award-winning regenerative cacao farm in the heart of the Amazon Rainforest.
@@ -826,7 +877,7 @@
 <div class="farmer-section">
 <h3 style="margin-top: 0;">Meet the Farmer</h3>
 <div class="farmer-profile">
-<img alt="Paulo" class="farmer-photo" src="../../assets/images/farms/paulo.jpg"/>
+<img alt="Paulo" class="farmer-photo" src="../../assets/images/farms/paulo_photo.jpg"/>
 <div class="farmer-details">
 <h3>Paulo &amp; Family</h3>
 <p style="color: var(--color-text-light); margin-bottom: 0.5rem;"><strong>La do Sitio</strong> • Pará, Amazon Rainforest, Brazil</p>
@@ -840,7 +891,8 @@
 </div>
 </div>
 </div>
-<footer id="contact">
+
+<nav class="post-navigation"><div class="nav-item nav-prev"><a class="nav-link" href="../agl7/">← <span class_="nav-label">AGL7</span></a></div><div class="nav-item nav-next"><a class="nav-link" href="../agl10/"><span class_="nav-label">AGL10</span> →</a></div></nav><footer id="contact">
 <div class="footer-content">
 <h3 style="font-family: var(--font-heading); font-size: 2rem; margin-bottom: 1rem;">Agroverse</h3>
 <p>Regenerating our Amazon rainforest, One Cacao at a time</p>
@@ -1148,5 +1200,8 @@
             });
         }
     });
-    </script></body>
+    </script>
+<script src="../../js/config.js"></script>
+<script src="../../js/universal-nav.js"></script>
+</body>
 </html>
