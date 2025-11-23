@@ -84,9 +84,16 @@
       checkoutBtn.style.display = 'block';
     }
 
-    container.innerHTML = cart.items.map(item => `
+    container.innerHTML = cart.items.map(item => {
+      // Convert image URL to absolute if helper is available
+      const imageUrl = item.image || '';
+      const absoluteImageUrl = (window.ImageUrlHelper && imageUrl) 
+        ? window.ImageUrlHelper.makeAbsolute(imageUrl) 
+        : imageUrl;
+      
+      return `
       <div class="cart-item" data-product-id="${item.productId}">
-        <img src="${item.image || ''}" alt="${item.name}" class="cart-item-image">
+        <img src="${absoluteImageUrl}" alt="${item.name}" class="cart-item-image" onerror="this.onerror=null; this.style.display='none';">
         <div class="cart-item-details">
           <div class="cart-item-name">${item.name}</div>
           <div class="cart-item-price">$${item.price.toFixed(2)}</div>
@@ -98,7 +105,8 @@
           </div>
         </div>
       </div>
-    `).join('');
+    `;
+    }).join('');
 
     // Attach event listeners
     container.querySelectorAll('.cart-item-decrease').forEach(btn => {

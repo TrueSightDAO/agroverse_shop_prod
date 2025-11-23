@@ -113,9 +113,16 @@
     if (!container) return;
 
     const items = order.items || [];
-    const itemsHtml = items.map(item => `
+    const itemsHtml = items.map(item => {
+      // Convert image URL to absolute if helper is available
+      const imageUrl = item.image || '';
+      const absoluteImageUrl = (window.ImageUrlHelper && imageUrl) 
+        ? window.ImageUrlHelper.makeAbsolute(imageUrl) 
+        : imageUrl;
+      
+      return `
       <div class="order-item">
-        ${item.image ? `<img src="${item.image}" alt="${item.name || 'Product'}" class="order-item-image" />` : ''}
+        ${absoluteImageUrl ? `<img src="${absoluteImageUrl}" alt="${item.name || 'Product'}" class="order-item-image" onerror="this.onerror=null; this.style.display='none';" />` : ''}
         <div class="order-item-content">
           <div class="order-item-name">${item.name || 'Product'}</div>
           <div class="order-item-details">
@@ -124,7 +131,8 @@
           </div>
         </div>
       </div>
-    `).join('');
+    `;
+    }).join('');
 
     const trackingUrl = getTrackingUrl(order.trackingNumber);
     const trackingHtml = order.trackingNumber 

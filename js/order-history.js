@@ -148,7 +148,7 @@
       const statusClass = getStatusClass(order.status);
       return `
         <div class="order-history-item">
-          ${order.firstItemImage ? `<img src="${order.firstItemImage}" alt="${order.firstItemName}" class="order-history-image" />` : ''}
+          ${order.firstItemImage ? `<img src="${window.ImageUrlHelper ? window.ImageUrlHelper.makeAbsolute(order.firstItemImage) : order.firstItemImage}" alt="${order.firstItemName}" class="order-history-image" />` : ''}
           <div class="order-history-content">
             <div class="order-history-header">
               <div class="order-history-info">
