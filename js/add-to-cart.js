@@ -26,18 +26,26 @@
     const toast = document.createElement('div');
     toast.id = 'add-to-cart-toast';
     toast.textContent = message;
+    
+    // Check if we're on the checkout page - position differently to avoid button overlap
+    const isCheckoutPage = window.location.pathname.includes('/checkout');
+    const toastPosition = isCheckoutPage 
+      ? 'top: 2rem; right: 2rem;' // Top-right on checkout page
+      : 'bottom: 2rem; right: 2rem;'; // Bottom-right on other pages
+    
     toast.style.cssText = `
       position: fixed;
-      bottom: 2rem;
-      right: 2rem;
+      ${toastPosition}
       background: var(--color-primary, #3b3333);
       color: white;
       padding: 1rem 1.5rem;
       border-radius: 8px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      z-index: 3000;
+      z-index: 10000;
       animation: slideIn 0.3s ease;
       font-weight: 600;
+      pointer-events: none;
+      max-width: 300px;
     `;
 
     // Add animation
@@ -53,6 +61,16 @@
           opacity: 1;
         }
       }
+      @keyframes slideInTop {
+        from {
+          transform: translateY(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
       @keyframes slideOut {
         from {
           transform: translateX(0);
@@ -60,6 +78,16 @@
         }
         to {
           transform: translateX(100%);
+          opacity: 0;
+        }
+      }
+      @keyframes slideOutTop {
+        from {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateY(-100%);
           opacity: 0;
         }
       }
@@ -71,9 +99,14 @@
 
     document.body.appendChild(toast);
 
+    // Use appropriate animation based on position
+    const slideInAnimation = isCheckoutPage ? 'slideInTop' : 'slideIn';
+    const slideOutAnimation = isCheckoutPage ? 'slideOutTop' : 'slideOut';
+    toast.style.animation = slideInAnimation + ' 0.3s ease';
+
     // Remove after 3 seconds
     setTimeout(() => {
-      toast.style.animation = 'slideOut 0.3s ease';
+      toast.style.animation = slideOutAnimation + ' 0.3s ease';
       setTimeout(() => {
         toast.remove();
       }, 300);
@@ -135,16 +168,24 @@
     }, 500);
 
     if (success) {
-      showToast('Added to cart!');
+      // Don't show toast on checkout page - user is already checking out
+      const isCheckoutPage = window.location.pathname.includes('/checkout');
+      if (!isCheckoutPage) {
+        showToast('Added to cart!');
+      }
       
-      // Optionally open cart sidebar
-      if (window.CartUI) {
+      // Optionally open cart sidebar (but not on checkout page)
+      if (window.CartUI && !isCheckoutPage) {
         setTimeout(() => {
           window.CartUI.open();
         }, 500);
       }
     } else {
-      showToast('Failed to add to cart. Please try again.');
+      // Only show error toast if not on checkout page
+      const isCheckoutPage = window.location.pathname.includes('/checkout');
+      if (!isCheckoutPage) {
+        showToast('Failed to add to cart. Please try again.');
+      }
     }
   }
 
