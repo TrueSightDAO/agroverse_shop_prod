@@ -307,11 +307,19 @@
             width: 100%;
         }
         
+        .gallery-item {
+            background-color: #f7f7f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
         .gallery-item img {
-            width: 100%;
+            width: auto;
             height: 100%;
+            max-width: 100%;
             display: block;
-            object-fit: cover;
+            object-fit: contain;
         }
         
         @media (max-width: 768px) {

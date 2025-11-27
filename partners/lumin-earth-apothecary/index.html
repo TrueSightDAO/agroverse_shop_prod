@@ -402,6 +402,40 @@
             .logo img {
                 height: 40px;
             }
+        }
+        
+        /* Image Gallery */
+        .partner-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            height: 400px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--color-bg-light);
+        }
+        
+        .gallery-item img {
+            width: auto;
+            height: 100%;
+            max-width: 100%;
+            display: block;
+            object-fit: contain;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-item {
+                height: 300px;
+            }
         }</style>
 <!-- Leaflet CSS for maps -->
 <link crossorigin="" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" rel="stylesheet"/>
@@ -439,10 +473,24 @@
 <section class="content-section">
 <h2>About Lumin Earth Apothecary</h2>
 <div class="partner-story">
-<p>Lumin Earth Apothecary is more than just a shop—it's an experience. As a mother-daughter-owned herbal sanctuary, crystal shop, and house-plant haven, they offer a place to nourish your body, mind, and spirit. Within their space, you'll find Lumin's Earths Tea Bar where they craft made-to-order herbal elixirs, tea lattes, and teas for you to sip and enjoy.</p>
-<p>Explore their selection of bulk herbs, high-vibrational crystals, rare houseplants, and their handcrafted line of herbal remedies, including tinctures and tea blends designed to support your well-being. Whether you're there for a cup of tea, the perfect crystal, or to immerse yourself in earth's medicine, Lumin Earth Apothecary invites you to experience the magic of their space.</p>
+<p>Lumin Earth Apothecary is more than just a shop—it's an experience. Owned by mother and daughter Summer and Sierra, this herbal sanctuary, crystal shop, and house-plant haven offers a place to nourish your body, mind, and spirit. Within their space, you'll find Lumin's Earths Tea Bar where Summer and Sierra craft made-to-order herbal elixirs, tea lattes, and teas for you to sip and enjoy.</p>
+<p>Explore their selection of bulk herbs, high-vibrational crystals, rare houseplants, and their handcrafted line of herbal remedies, including tinctures and tea blends designed to support your well-being. Whether you're there for a cup of tea, the perfect crystal, or to immerse yourself in earth's medicine, Summer and Sierra invite you to experience the magic of their space.</p>
 <p>They also offer soul readings and herbal guidance, creating a holistic approach to wellness that aligns perfectly with Agroverse's mission of regenerative, ethically-sourced cacao. Find our regenerative cacao products at their beautiful Morro Bay location.</p>
 </div>
+
+<!-- Partner Images Gallery -->
+<div class="partner-gallery">
+<div class="gallery-item">
+<img alt="Sitting area in Lumin Earth Apothecary" src="../../assets/partners/lumin-earth-sitting-area.jpg" loading="lazy"/>
+</div>
+<div class="gallery-item">
+<img alt="Cup of ceremonial cacao at Lumin Earth Apothecary" src="../../assets/partners/lumin-earth-cacao-cup.jpg" loading="lazy"/>
+</div>
+<div class="gallery-item">
+<img alt="Summer posing with Agroverse ceremonial cacao bags behind her counter" src="../../assets/partners/lumin-earth-summer-with-bags.jpg" loading="lazy"/>
+</div>
+</div>
+
 <div class="partner-info">
 <h3>Partner Information</h3>
 <div class="info-row">
@@ -460,6 +508,10 @@
 <div class="info-row">
 <div class="info-label">Email</div>
 <div class="info-value"><a href="mailto:luminearthapothecary@gmail.com">luminearthapothecary@gmail.com</a></div>
+</div>
+<div class="info-row">
+<div class="info-label">Owners</div>
+<div class="info-value">Summer and Sierra</div>
 </div>
 <div class="info-row">
 <div class="info-label">Status</div>
