@@ -620,15 +620,15 @@
             
             // Add markers for each stop
             stops.forEach((stop, index) => {
-                const dayNum = dayNumbers[index];
+                const stopNumber = index + 1;
                 const marker = L.marker([stop.lat, stop.lon])
                     .addTo(map)
-                    .bindPopup(`<b>Day ${dayNum}</b><br>${stop.name}<br>${stop.location}`);
+                    .bindPopup(`<b>Stop ${stopNumber}</b><br>${stop.name}<br>${stop.location}`);
                 
-                // Number the markers with day numbers
+                // Number the markers with sequential stop numbers
                 const icon = L.divIcon({
                     className: 'custom-marker',
-                    html: `<div style="background: #3b3333; color: white; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-weight: bold; border: 2px solid white; font-size: 12px;">${dayNum}</div>`,
+                    html: `<div style="background: #3b3333; color: white; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-weight: bold; border: 2px solid white; font-size: 12px;">${stopNumber}</div>`,
                     iconSize: [30, 30],
                     iconAnchor: [15, 15]
                 });
