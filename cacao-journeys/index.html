@@ -97,10 +97,31 @@
         
         /* Hero Section */
         .pilgrimages-hero {
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            background-image: url('../assets/images/cacao-journeys-hero.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             color: white;
             padding: 6rem 2rem;
             text-align: center;
+            position: relative;
+        }
+        
+        .pilgrimages-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(59, 51, 51, 0.6) 0%, rgba(77, 77, 77, 0.7) 100%);
+            z-index: 1;
+        }
+        
+        .pilgrimages-hero h1,
+        .pilgrimages-hero p {
+            position: relative;
+            z-index: 2;
         }
         
         .pilgrimages-hero h1 {
@@ -332,12 +353,10 @@
 <li><a href="../index.html#home">Home</a></li>
 <li><a href="../index.html#mission">Mission</a></li>
 <li><a href="../index.html#products">Products</a></li>
-<li><a href="../index.html#farmers">Farms</a></li>
-<li><a href="../index.html#shipments">Shipments</a></li>
-<li><a href="../blog/">Blog</a></li>
-<li><a href="../index.html#gatherings">Gatherings</a></li>
-<li><a href="../partners/index.html">Partners</a></li>
 <li><a href="index.html">Cacao Journeys</a></li>
+<li><a href="../index.html#shipments">Shipments</a></li>
+<li><a href="../index.html#gatherings">Gatherings</a></li>
+<li><a href="../blog/">Blog</a></li>
 <li><a href="../order-history/">Order History</a></li>
 <li><a href="../index.html#contact">Contact</a></li>
 </ul>

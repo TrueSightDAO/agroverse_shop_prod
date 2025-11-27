@@ -30,24 +30,20 @@
     }
     
     // Get Brazilian Drift order (South to North: Founderhaus, then farms)
+    // This matches the exact order from the Brazilian path page (sorted by latitude ascending)
     function getBrazilianDriftOrder() {
-        const order = ['founderhaus']; // Start with Founderhaus
+        // Define the exact order matching the Brazilian path page itinerary
+        // Sorted South to North (latitude ascending: -27.4305 to -3.3922222)
+        const exactOrder = [
+            'founderhaus',                    // -27.4305 (Florianópolis) - Starting point
+            'fazenda-capelavelha-bahia',      // -14.6173663 (Bahia)
+            'fazenda-santa-ana-bahia',        // -14.3225976 (Bahia)
+            'vivi-jesus-do-deus-itacare',    // -14.324474 (Itacaré, Bahia)
+            'oscar-bahia',                    // -12.9714 (Bahia)
+            'paulo-la-do-sitio-para'          // -3.3922222 (Pará, Amazon) - Northernmost
+        ];
         
-        // Add farms in South to North order (latitude ascending)
-        if (window.FARMS_DATA) {
-            const brazilianFarms = {};
-            for (const slug in window.FARMS_DATA) {
-                const farm = window.FARMS_DATA[slug];
-                if (farm.location.includes('Brazil')) {
-                    brazilianFarms[slug] = farm;
-                }
-            }
-            const farmSlugs = Object.keys(brazilianFarms);
-            farmSlugs.sort((a, b) => brazilianFarms[a].lat - brazilianFarms[b].lat); // South to North
-            order.push(...farmSlugs);
-        }
-        
-        return order;
+        return exactOrder;
     }
     
     // Get neighbors in drift order
@@ -93,20 +89,24 @@
         if (prevSlug) {
             if (prevSlug === 'founderhaus') {
                 previous = window.PARTNERS_DATA ? window.PARTNERS_DATA[prevSlug] : null;
-            } else if (isPartner) {
+            } else if (window.FARMS_DATA && window.FARMS_DATA[prevSlug]) {
+                // Previous is a farm
+                previous = window.FARMS_DATA[prevSlug];
+            } else if (window.PARTNERS_DATA && window.PARTNERS_DATA[prevSlug]) {
+                // Previous is a partner
                 previous = window.PARTNERS_DATA[prevSlug];
-            } else {
-                previous = window.FARMS_DATA ? window.FARMS_DATA[prevSlug] : null;
             }
         }
         
         if (nextSlug) {
             if (nextSlug === 'founderhaus') {
                 next = window.PARTNERS_DATA ? window.PARTNERS_DATA[nextSlug] : null;
-            } else if (isPartner) {
+            } else if (window.FARMS_DATA && window.FARMS_DATA[nextSlug]) {
+                // Next is a farm
+                next = window.FARMS_DATA[nextSlug];
+            } else if (window.PARTNERS_DATA && window.PARTNERS_DATA[nextSlug]) {
+                // Next is a partner
                 next = window.PARTNERS_DATA[nextSlug];
-            } else {
-                next = window.FARMS_DATA ? window.FARMS_DATA[nextSlug] : null;
             }
         }
         

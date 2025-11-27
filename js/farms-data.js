@@ -20,8 +20,8 @@ window.FARMS_DATA = {
     'oscar-bahia': {
         name: 'Oscar\'s Farm',
         slug: 'oscar-bahia',
-        lat: -12.9714,
-        lon: -38.5014,
+        lat: -14.052624,
+        lon: -39.438206,
         location: 'Bahia, Brazil'
     },
     'paulo-la-do-sitio-para': {
@@ -34,8 +34,8 @@ window.FARMS_DATA = {
     'vivi-jesus-do-deus-itacare': {
         name: 'Vivi\'s Jesus Do Deus Farm',
         slug: 'vivi-jesus-do-deus-itacare',
-        lat: -14.2786,
-        lon: -38.9969,
+        lat: -14.324474,
+        lon: -39.014201,
         location: 'Itacaré, Bahia, Brazil'
     }
 };

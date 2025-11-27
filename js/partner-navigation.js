@@ -27,11 +27,18 @@
         
         let navHTML = '';
         
-        // Previous partner
+        // Previous stop (partner or farm)
         if (result.previous) {
-            const prevUrl = result.previous.slug === 'founderhaus' 
-                ? '../founderhaus/index.html'
-                : '../' + result.previous.slug + '/index.html';
+            let prevUrl;
+            if (result.previous.slug === 'founderhaus') {
+                prevUrl = '../founderhaus/index.html';
+            } else if (window.FARMS_DATA && window.FARMS_DATA[result.previous.slug]) {
+                // Previous is a farm
+                prevUrl = '../../farms/' + result.previous.slug + '/index.html';
+            } else {
+                // Previous is a partner
+                prevUrl = '../' + result.previous.slug + '/index.html';
+            }
             navHTML += '<a href="' + prevUrl + '" class="partner-nav-link previous">';
             navHTML += '<span class="partner-nav-label">← Previous</span>';
             navHTML += '<span class="partner-nav-name">' + result.previous.name + '</span>';
@@ -43,11 +50,18 @@
             navHTML += '</div>';
         }
         
-        // Next partner
+        // Next stop (partner or farm)
         if (result.next) {
-            const nextUrl = result.next.slug === 'founderhaus'
-                ? '../founderhaus/index.html'
-                : '../' + result.next.slug + '/index.html';
+            let nextUrl;
+            if (result.next.slug === 'founderhaus') {
+                nextUrl = '../founderhaus/index.html';
+            } else if (window.FARMS_DATA && window.FARMS_DATA[result.next.slug]) {
+                // Next is a farm
+                nextUrl = '../../farms/' + result.next.slug + '/index.html';
+            } else {
+                // Next is a partner
+                nextUrl = '../' + result.next.slug + '/index.html';
+            }
             navHTML += '<a href="' + nextUrl + '" class="partner-nav-link next">';
             navHTML += '<span class="partner-nav-label">Next →</span>';
             navHTML += '<span class="partner-nav-name">' + result.next.name + '</span>';
