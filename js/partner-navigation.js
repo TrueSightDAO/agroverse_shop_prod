@@ -1,13 +1,13 @@
 /**
  * Partner Navigation Script
- * Adds next/previous navigation based on geographic proximity
+ * Adds next/previous navigation based on drift/journey order
  */
 (function() {
     'use strict';
     
-    // Wait for partners data to load
+    // Wait for partners data and drift navigation to load
     function initPartnerNavigation() {
-        if (!window.PARTNERS_DATA || !window.findNearestNeighbors) {
+        if (!window.PARTNERS_DATA || !window.getDriftNeighbors) {
             setTimeout(initPartnerNavigation, 100);
             return;
         }
@@ -18,9 +18,9 @@
         if (!slugMatch) return;
         
         const currentSlug = slugMatch[1];
-        const neighbors = window.findNearestNeighbors(currentSlug);
+        const result = window.getDriftNeighbors(currentSlug, true);
         
-        if (!neighbors) return;
+        if (!result || (!result.previous && !result.next)) return;
         
         const navContainer = document.getElementById('partner-navigation');
         if (!navContainer) return;
@@ -28,10 +28,13 @@
         let navHTML = '';
         
         // Previous partner
-        if (neighbors.previous) {
-            navHTML += '<a href="../' + neighbors.previous.slug + '/index.html" class="partner-nav-link previous">';
+        if (result.previous) {
+            const prevUrl = result.previous.slug === 'founderhaus' 
+                ? '../founderhaus/index.html'
+                : '../' + result.previous.slug + '/index.html';
+            navHTML += '<a href="' + prevUrl + '" class="partner-nav-link previous">';
             navHTML += '<span class="partner-nav-label">← Previous</span>';
-            navHTML += '<span class="partner-nav-name">' + neighbors.previous.name + '</span>';
+            navHTML += '<span class="partner-nav-name">' + result.previous.name + '</span>';
             navHTML += '</a>';
         } else {
             navHTML += '<div class="partner-nav-link previous disabled">';
@@ -41,10 +44,13 @@
         }
         
         // Next partner
-        if (neighbors.next) {
-            navHTML += '<a href="../' + neighbors.next.slug + '/index.html" class="partner-nav-link next">';
+        if (result.next) {
+            const nextUrl = result.next.slug === 'founderhaus'
+                ? '../founderhaus/index.html'
+                : '../' + result.next.slug + '/index.html';
+            navHTML += '<a href="' + nextUrl + '" class="partner-nav-link next">';
             navHTML += '<span class="partner-nav-label">Next →</span>';
-            navHTML += '<span class="partner-nav-name">' + neighbors.next.name + '</span>';
+            navHTML += '<span class="partner-nav-name">' + result.next.name + '</span>';
             navHTML += '</a>';
         } else {
             navHTML += '<div class="partner-nav-link next disabled">';
@@ -54,6 +60,15 @@
         }
         
         navContainer.innerHTML = navHTML;
+        
+        // Update back link if journey URL is available
+        if (result.journeyUrl) {
+            const backLink = document.querySelector('.back-link');
+            if (backLink) {
+                backLink.href = result.journeyUrl;
+                backLink.textContent = 'Back to Journey';
+            }
+        }
     }
     
     // Initialize when DOM is ready

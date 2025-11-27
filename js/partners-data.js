@@ -6,51 +6,58 @@ window.PARTNERS_DATA = {
     'block71-silicon-valley': {
         name: 'Block71 Silicon Valley',
         slug: 'block71-silicon-valley',
-        lat: 37.3956,
-        lon: -122.0758,
-        location: 'Silicon Valley, California'
+        lat: 37.5669704,
+        lon: -122.3238659,
+        location: 'San Mateo, California',
+        description: 'Connecting Singaporean and US entrepreneurs, driving innovation through collaboration.'
     },
     'go-ask-alice': {
         name: 'Go Ask Alice',
         slug: 'go-ask-alice',
-        lat: 36.9741,
-        lon: -122.0308,
-        location: 'Santa Cruz, California'
+        lat: 36.9719889,
+        lon: -122.0256564,
+        location: 'Santa Cruz, California',
+        description: 'A vibrant, community-focused small business rooted in the heart of downtown Santa Cruz, California. As a women-owned and LGBTQ+ friendly space, Go Ask Alice creates a welcoming environment for all.'
     },
     'green-gulch-farm-zen-center': {
         name: 'Green Gulch Farm Zen Center',
         slug: 'green-gulch-farm-zen-center',
         lat: 37.8685,
         lon: -122.5450,
-        location: 'Marin County, California'
+        location: 'Marin County, California',
+        description: 'A serene Buddhist practice center in Marin County, blending spiritual cultivation, organic farming, and mindful living in harmony with nature.'
     },
     'hacker-dojo': {
         name: 'Hacker Dojo',
         slug: 'hacker-dojo',
-        lat: 37.3956,
-        lon: -122.0758,
-        location: 'Mountain View, California'
+        lat: 37.3962356,
+        lon: -122.0491779,
+        location: 'Mountain View, California',
+        description: 'A community workspace and innovation hub in Mountain View, California, fostering creativity, collaboration, and technological innovation.'
     },
     'kikis-cocoa': {
         name: 'Kiki\'s Cocoa',
         slug: 'kikis-cocoa',
-        lat: 37.7749,
-        lon: -122.4194,
-        location: 'San Francisco, California'
+        lat: 37.7746386,
+        lon: -122.4398332,
+        location: 'San Francisco, California',
+        description: 'A cozy cacao-focused space in San Francisco where community gathers around ceremonial cacao and mindful connection.'
     },
     'love-wisdom-power': {
         name: 'Love Wisdom Power',
         slug: 'love-wisdom-power',
         lat: 42.2190,
         lon: -123.2770,
-        location: 'Williams, Oregon'
+        location: 'Williams, Oregon',
+        description: 'In the tranquil, forested embrace of Williams, Oregon, Love Wisdom Power unfolds as a sacred conduit to wholeness, where profound guidance meets regenerative cacao.'
     },
     'miss-tomato': {
         name: 'Miss Tomato',
         slug: 'miss-tomato',
         lat: 37.7066,
         lon: -122.4619,
-        location: 'Daly City, California'
+        location: 'Daly City, California',
+        description: 'A community gathering space in Daly City, California, where local connections and regenerative cacao create meaningful experiences.'
     },
     'peace-on-fifth': {
         name: 'Peace on Fifth',
@@ -78,7 +85,8 @@ window.PARTNERS_DATA = {
         slug: 'secrets-of-garden-slo',
         lat: 35.2828,
         lon: -120.6596,
-        location: 'San Luis Obispo, California'
+        location: 'San Luis Obispo, California',
+        description: 'A garden sanctuary in San Luis Obispo, California, where nature, community, and regenerative cacao come together in a peaceful, nurturing environment.'
     },
     'soulfulness-breathe': {
         name: 'Soulfulness Breathe',
@@ -92,56 +100,64 @@ window.PARTNERS_DATA = {
         slug: 'the-enchanted-forest-boutique',
         lat: 39.7458,
         lon: -121.8374,
-        location: 'Chico, California'
+        location: 'Chico, California',
+        description: 'Owned by Chris and Monique, The Enchanted Forest Boutique in Chico, California, offers a magical space where community gathers around crystals, herbs, and regenerative cacao.'
     },
     'the-ponderosa-slab-city': {
         name: 'The Ponderosa, Slab City',
         slug: 'the-ponderosa-slab-city',
         lat: 33.2581,
         lon: -115.4650,
-        location: 'Slab City, California'
+        location: 'Slab City, California',
+        description: 'A unique community space in Slab City, California, where free-spirited gatherings and regenerative cacao create connections in the heart of the desert.'
     },
     'lumin-earth-apothecary': {
         name: 'Lumin Earth Apothecary',
         slug: 'lumin-earth-apothecary',
         lat: 35.3666915,
         lon: -120.8502279,
-        location: 'Morro Bay, California'
+        location: 'Morro Bay, California',
+        description: 'A mother-daughter-owned herbal sanctuary, crystal shop, and house-plant haven in Morro Bay, California. Experience regenerative cacao at their tea bar where Summer and Sierra craft made-to-order herbal elixirs and teas.'
     },
     'republic-cafe-and-ming-lounge': {
         name: 'Republic Cafe and Ming Lounge',
         slug: 'republic-cafe-and-ming-lounge',
         lat: 45.5152,
         lon: -122.6784,
-        location: 'Portland, Oregon'
+        location: 'Portland, Oregon',
+        description: 'One of Portland\'s oldest continuously running Chinese restaurants since 1922, owned by the Mui family for over three decades. This historic venue in Old Town-Chinatown offers a unique space where tradition meets community, and regenerative cacao creates connections.'
     },
     'prism-percussions': {
         name: 'Prism Percussions',
         slug: 'prism-percussions',
         lat: 44.5646,
         lon: -123.2620,
-        location: 'Corvallis, Oregon'
+        location: 'Corvallis, Oregon',
+        description: 'Crafts soulful wooden drums featuring intricate laser-etched designs. Founded by artisan Jenifer Runnion, Prism Percussions blends fine craftsmanship with ecological restoration, creating spaces where rhythm, creativity, and regenerative cacao converge.'
     },
     'love-of-ganesha': {
         name: 'Love of Ganesha',
         slug: 'love-of-ganesha',
         lat: 37.7699,
         lon: -122.4469,
-        location: 'San Francisco, California'
+        location: 'San Francisco, California',
+        description: 'A cornerstone of spiritual exploration in San Francisco\'s Haight Street since the counterculture era, offering raw crystals, handcrafted jewelry, protection amulets, and spiritually blessed items, where regenerative cacao enhances sacred gatherings.'
     },
     'embodied-blindfold-dance': {
         name: 'Embodied Blindfold Dance',
         slug: 'embodied-blindfold-dance',
         lat: 44.0521,
         lon: -123.0868,
-        location: 'Eugene, Oregon'
+        location: 'Eugene, Oregon',
+        description: 'A unique movement practice space in Eugene, Oregon, offering blindfolded dance experiences that deepen connection to self and others, enhanced by regenerative cacao.'
     },
     'edge-and-node-house-of-web3': {
         name: 'Edge and Node, House of Web3',
         slug: 'edge-and-node-house-of-web3',
-        lat: 37.7749,
-        lon: -122.4194,
-        location: 'San Francisco, California'
+        lat: 37.8008980,
+        lon: -122.4589384,
+        location: 'San Francisco, California',
+        description: 'A collaborative space in San Francisco serving as a hub for Web3 innovators, developers, and entrepreneurs. Fosters innovation, collaboration, and community building within the decentralized technology ecosystem, enhanced by regenerative cacao.'
     },
     'founderhaus': {
         name: 'Founderhaus',
@@ -162,7 +178,8 @@ window.PARTNERS_DATA = {
         slug: 'rpm-ninja',
         lat: 47.6062,
         lon: -122.3321,
-        location: 'Seattle, Washington'
+        location: 'Seattle, Washington',
+        description: 'Led by Jae Nice, RPM Ninja creates safe creative spaces for music, art, and community in Seattle. Through immersive events, fantasy balls, bazaars, and workshops, they bring together artists, musicians, and community members to celebrate creativity and connection.'
     }
 };
 
