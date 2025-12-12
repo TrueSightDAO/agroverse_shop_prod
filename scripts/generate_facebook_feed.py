@@ -1,27 +1,29 @@
 #!/usr/bin/env python3
 """
-Generate Facebook Product Feed XML file from products.js
+Generate Facebook Product Feed (TSV and XML) from products.js
 
 This script:
 1. Reads products from js/products.js
-2. Generates a Facebook-compatible product feed XML file
-3. Outputs to facebook_product_feed.xml in the root directory
+2. Generates Facebook-compatible product feeds in both TSV and XML formats
+3. Outputs to facebook_product_feed.tsv and facebook_product_feed.xml
 
-Facebook Product Feed Requirements:
+Facebook Product Feed Requirements (TSV format):
 - id (required): Unique product identifier
 - title (required): Product name
 - description: Product description
 - link (required): Product page URL
 - image_link (required): Product image URL
-- availability (required): in stock / out of stock
-- price (required): Price with currency
-- brand: Brand name
+- availability (required): in stock / out of stock / preorder
 - condition (required): new / refurbished / used
-- currency (required): Currency code (USD)
+- price (required): Price with currency (e.g., "25.00 USD")
+- brand: Brand name
+- google_product_category: Google product category ID
+- product_type: Product category/type
 """
 
 import re
 import json
+import csv
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 from pathlib import Path
@@ -29,6 +31,7 @@ from datetime import datetime
 
 BASE_DIR = Path(__file__).parent.parent
 PRODUCTS_JS_FILE = BASE_DIR / 'js' / 'products.js'
+OUTPUT_TSV_FILE = BASE_DIR / 'facebook_product_feed.tsv'
 OUTPUT_XML_FILE = BASE_DIR / 'facebook_product_feed.xml'
 BASE_URL = 'https://www.agroverse.shop'
 
@@ -62,17 +65,28 @@ def parse_products_js():
         product = {}
         
         # More sophisticated field extraction
-        # Match: key: value (where value can be string, number, or quoted string)
-        field_pattern = r"(\w+):\s*((?:'[^']*'|\"[^\"]*\"|\d+\.?\d*|'[^']*'|\"[^\"]*\"))"
+        # Handle both single and double quotes, including escaped quotes
+        # Match: key: value where value can be:
+        # - Single-quoted string (handling escaped quotes)
+        # - Double-quoted string (handling escaped quotes)
+        # - Number
+        field_pattern = r"(\w+):\s*((?:'((?:[^'\\]|\\.)*)'|\"((?:[^\"\\]|\\.)*)\"|\d+\.?\d*))"
         
         for field_match in re.finditer(field_pattern, product_data_str):
             key = field_match.group(1)
             value_raw = field_match.group(2).strip()
             
-            # Remove quotes if present
-            if (value_raw.startswith("'") and value_raw.endswith("'")) or \
-               (value_raw.startswith('"') and value_raw.endswith('"')):
-                value = value_raw[1:-1]
+            # Check if it's a quoted string
+            if value_raw.startswith("'") and value_raw.endswith("'"):
+                # Single-quoted string - get the inner content
+                value = field_match.group(3) if field_match.group(3) is not None else value_raw[1:-1]
+                # Unescape escaped quotes
+                value = value.replace("\\'", "'").replace("\\\\", "\\")
+            elif value_raw.startswith('"') and value_raw.endswith('"'):
+                # Double-quoted string - get the inner content
+                value = field_match.group(4) if field_match.group(4) is not None else value_raw[1:-1]
+                # Unescape escaped quotes
+                value = value.replace('\\"', '"').replace("\\\\", "\\")
             else:
                 # Try to convert to number
                 try:
@@ -139,13 +153,80 @@ def generate_description(product):
     
     return description
 
-def generate_facebook_feed():
-    """Generate Facebook product feed XML."""
-    print(f"Reading products from {PRODUCTS_JS_FILE}...")
-    products = parse_products_js()
+def generate_tsv_feed(products):
+    """Generate Facebook product feed in TSV format (matches legacy WIX format)."""
+    # Facebook TSV feed columns (required and recommended fields)
+    columns = [
+        'id',                    # Required: Unique product identifier
+        'title',                 # Required: Product name
+        'description',           # Recommended: Product description
+        'link',                  # Required: Product page URL
+        'image_link',            # Required: Product image URL
+        'availability',          # Required: in stock / out of stock / preorder
+        'condition',             # Required: new / refurbished / used
+        'price',                 # Required: Price with currency (e.g., "25.00 USD")
+        'brand',                 # Recommended: Brand name
+        'google_product_category', # Recommended: Google product category ID
+        'product_type',         # Recommended: Product category/type
+        'custom_label_0',        # Optional: Farm name
+        'custom_label_1',       # Optional: Shipment ID
+    ]
     
-    print(f"Found {len(products)} products")
+    rows = []
     
+    for product_id, product in products.items():
+        category = product.get('category', 'retail')
+        
+        # Price formatting
+        price = product.get('price', 0)
+        try:
+            price_float = float(price) if price else 0.0
+            if price_float > 0:
+                price_str = format_price(price_float)
+            else:
+                price_str = '0.00 USD'  # Placeholder for wholesale
+        except (ValueError, TypeError):
+            price_str = '0.00 USD'
+        
+        # Availability
+        availability = 'in stock'
+        
+        # Image URL
+        image_path = product.get('image', '')
+        image_url = get_image_url(image_path) if image_path else ''
+        
+        # Description
+        description = generate_description(product)
+        
+        row = {
+            'id': product_id,
+            'title': product.get('name', ''),
+            'description': description,
+            'link': get_product_url(product_id),
+            'image_link': image_url,
+            'availability': availability,
+            'condition': 'new',
+            'price': price_str,
+            'brand': 'Agroverse',
+            'google_product_category': '357',  # Food, Beverages & Tobacco > Food Items > Snack Foods
+            'product_type': category.title() if category else '',
+            'custom_label_0': product.get('farm', ''),
+            'custom_label_1': product.get('shipment', ''),
+        }
+        
+        rows.append(row)
+    
+    # Write TSV file
+    print(f"Writing TSV feed to {OUTPUT_TSV_FILE}...")
+    with open(OUTPUT_TSV_FILE, 'w', encoding='utf-8', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=columns, delimiter='\t', extrasaction='ignore')
+        writer.writeheader()
+        writer.writerows(rows)
+    
+    print(f"✅ Generated TSV feed: {OUTPUT_TSV_FILE}")
+
+def generate_xml_feed(products):
+    """Generate Facebook product feed in XML format."""
     # Create XML structure
     rss = ET.Element('rss', {
         'version': '2.0',
@@ -182,12 +263,9 @@ def generate_facebook_feed():
         description = generate_description(product)
         ET.SubElement(item, 'g:description').text = escape_xml(description)
         
-        # Availability (required) - assume in stock for retail, contact for wholesale
+        # Availability (required)
         category = product.get('category', 'retail')
-        if category == 'retail':
-            availability = 'in stock'
-        else:
-            availability = 'in stock'  # Still in stock, but requires quote
+        availability = 'in stock'
         ET.SubElement(item, 'g:availability').text = availability
         
         # Price (required)
@@ -198,11 +276,8 @@ def generate_facebook_feed():
                 price_str = format_price(price_float)
                 ET.SubElement(item, 'g:price').text = price_str
             else:
-                # For wholesale products, we still need a price field
-                # Facebook requires it, so we'll use a placeholder
                 ET.SubElement(item, 'g:price').text = '0.00 USD'
         except (ValueError, TypeError):
-            # If price can't be converted, use placeholder
             ET.SubElement(item, 'g:price').text = '0.00 USD'
         
         # Condition (required)
@@ -221,8 +296,7 @@ def generate_facebook_feed():
         if category:
             ET.SubElement(item, 'g:product_type').text = escape_xml(category.title())
         
-        # Google product category (optional but recommended)
-        # Food, Beverages & Tobacco > Food Items > Snack Foods
+        # Google product category
         ET.SubElement(item, 'g:google_product_category').text = '357'
     
     # Convert to string with pretty formatting
@@ -235,17 +309,33 @@ def generate_facebook_feed():
     pretty_xml = '\n'.join(lines)
     
     # Write to file
-    print(f"Writing feed to {OUTPUT_XML_FILE}...")
+    print(f"Writing XML feed to {OUTPUT_XML_FILE}...")
     with open(OUTPUT_XML_FILE, 'w', encoding='utf-8') as f:
         f.write(pretty_xml)
     
-    print(f"✅ Successfully generated Facebook product feed with {len(products)} products")
-    print(f"📄 Output file: {OUTPUT_XML_FILE}")
-    print(f"🌐 Feed URL: {BASE_URL}/facebook_product_feed.xml")
+    print(f"✅ Generated XML feed: {OUTPUT_XML_FILE}")
+
+def generate_facebook_feed():
+    """Generate Facebook product feeds in both TSV and XML formats."""
+    print(f"Reading products from {PRODUCTS_JS_FILE}...")
+    products = parse_products_js()
+    
+    print(f"Found {len(products)} products\n")
+    
+    # Generate both TSV (legacy format) and XML feeds
+    generate_tsv_feed(products)
+    generate_xml_feed(products)
+    
+    print(f"\n✅ Successfully generated Facebook product feeds with {len(products)} products")
+    print(f"📄 TSV file: {OUTPUT_TSV_FILE}")
+    print(f"📄 XML file: {OUTPUT_XML_FILE}")
+    print(f"🌐 TSV Feed URL: {BASE_URL}/facebook_product_feed.tsv")
+    print(f"🌐 XML Feed URL: {BASE_URL}/facebook_product_feed.xml")
     print("\nNext steps:")
-    print("1. Commit and push the XML file to GitHub")
+    print("1. Commit and push both feed files to GitHub")
     print("2. In Facebook Commerce Manager, add a data source")
-    print("3. Use the feed URL: https://www.agroverse.shop/facebook_product_feed.xml")
+    print("3. Use the TSV feed URL (matches legacy format): https://www.agroverse.shop/facebook_product_feed.tsv")
+    print("   OR use the XML feed URL: https://www.agroverse.shop/facebook_product_feed.xml")
 
 if __name__ == '__main__':
     try:
