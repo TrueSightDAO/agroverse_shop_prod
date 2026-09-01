@@ -47,6 +47,9 @@ from transcript_publish_helpers import (
     propose_title,
     youtube_snippet_title,
 )
+from generate_youtube_descriptions import build_description
+from add_gps_to_youtube_videos_json import gps_for_source
+
 REPO_ROOT = SCRIPT_DIR.parent
 CREDENTIALS_FILE = SCRIPT_DIR / "youtube_credentials.json"
 TOKEN_FILE = SCRIPT_DIR / "youtube_token.json"
@@ -274,6 +277,12 @@ def main() -> None:
         skips = set(json.loads(args.skips.read_text(encoding="utf-8")).get("skip_basenames") or [])
 
     videos = manifest.get("videos") or []
+    # Raw transcripts keyed by basename (used for the polished description at upload).
+    raw_by_bn = {
+        v.get("basename"): (v.get("transcript") or "")
+        for v in videos
+        if v.get("basename")
+    }
     todo = [v for v in videos if v.get("basename") not in skips]
 
     youtube = None
@@ -302,6 +311,14 @@ def main() -> None:
             continue
         upload_queue.append(v)
 
+    # Every cached entry must carry a polished description (uniform format).
+    for bn, entry in mapping.items():
+        if not (entry.get("description") or "").strip():
+            raise SystemExit(
+                f"ERROR: {bn} in youtube_videos.json has no polished description. "
+                "Run generate_youtube_descriptions.py first."
+            )
+
     title_map = build_upload_title_map(videos, [v["basename"] for v in upload_queue])
 
     for v in upload_queue:
@@ -312,13 +329,28 @@ def main() -> None:
         base = v["basename"]
         human = title_map.get(base) or propose_title(clean_transcript(v.get("transcript") or ""), base)
         title = youtube_snippet_title(human)
-        desc = description_for_video(title, v.get("transcript") or "")
+        # Build the polished, blog-parity description (clean_transcript +
+        # Grok polish cache-first) so the cache never stores raw ASR text.
+        desc = build_description(
+            base,
+            {
+                "video_id": "",
+                "title": title,
+            },
+            raw_by_bn=raw_by_bn,
+        )
         tags = tags_default(title)
         duration = float(v.get("duration_sec") or 0)
         srt_content = transcript_to_srt(v.get("transcript") or "", duration)
 
         if args.dry_run:
-            print(f"DRY-RUN upload: {base}\n  title: {title}\n", flush=True)
+            gps = gps_for_source(str(path))
+            gps_txt = (
+                f"  gps: {gps['latitude']}, {gps['longitude']} [file_exif]"
+                if gps
+                else "  gps: (none)"
+            )
+            print(f"DRY-RUN upload: {base}\n  title: {title}\n{gps_txt}\n", flush=True)
             done += 1
             continue
 
@@ -334,13 +366,22 @@ def main() -> None:
             break
 
         vid = resp["id"]
-        mapping[base] = {
+        entry = {
             "video_id": vid,
             "url": f"https://www.youtube.com/watch?v={vid}",
             "embed_url": f"https://www.youtube.com/embed/{vid}",
             "title": title,
+            "description": desc,
             "uploaded_via": "youtube_batch_incoming.py",
         }
+        # Capture the source file's own embedded GPS at ingress (highest
+        # precision; the file is in hand right now) so the cache is geo-searchable.
+        gps = gps_for_source(str(path))
+        if gps:
+            entry["latitude"] = gps["latitude"]
+            entry["longitude"] = gps["longitude"]
+            entry["gps_source"] = "file_exif"
+        mapping[base] = entry
         save_mapping(mapping)
 
         if args.captions:
