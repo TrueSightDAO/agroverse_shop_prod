@@ -6,21 +6,21 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <!-- SEO Meta Tags -->
-<title>Fazenda Analuana - Regenerative Cacao Farm | Agroverse</title>
-<meta content="Fazenda Analuana (Ana Luana) is a regenerative cacao farm in Bahia, Brazil, producing high-quality cacao molasses and supporting sustainable farming practices." name="description"/>
-<link href="https://www.agroverse.shop/farms/fazenda-analuana-bahia" rel="canonical"/>
+<title>Fazenda Clara — Itacaré, Bahia | Agroverse</title>
+<meta content="Cabruca cacao farm of Fernando Soller Gimenez & Clara in rural Itacaré, Bahia. Special melon-note cacao nourished with trace seawater minerals. FSVP site-inspection (trees) recorded 10 Sep 2024." name="description"/>
+<link href="https://www.agroverse.shop/farms/fazenda-clara-bahia" rel="canonical"/>
 <!-- Open Graph / Facebook -->
 <meta content="website" property="og:type"/>
-<meta content="https://www.agroverse.shop/farms/fazenda-analuana-bahia" property="og:url"/>
-<meta content="Fazenda Analuana - Regenerative Cacao Farm | Agroverse" property="og:title"/>
-<meta content="Regenerative cacao farm in Bahia, Brazil, producing high-quality cacao molasses and supporting sustainable farming practices." property="og:description"/>
-<meta content="https://raw.githubusercontent.com/TrueSightDAO/truesight_me/main/assets/shipments/agl5.avif" property="og:image"/><meta content="630" property="og:image:height"/><meta content="1200" property="og:image:width"/>
+<meta content="https://www.agroverse.shop/farms/fazenda-clara-bahia" property="og:url"/>
+<meta content="Fazenda Clara — Itacaré, Bahia | Agroverse" property="og:title"/>
+<meta content="Cabruca cacao farm of Fernando Soller Gimenez & Clara in rural Itacaré, Bahia. Special melon-note cacao nourished with trace seawater minerals. FSVP site-inspection (trees) recorded 10 Sep 2024." property="og:description"/>
+<meta content="https://raw.githubusercontent.com/TrueSightDAO/agroverse_shop_beta/main/assets/images/farms/fazenda-clara-bahia-hero.jpg" property="og:image"/><meta content="630" property="og:image:height"/><meta content="1200" property="og:image:width"/>
 <!-- Twitter -->
 <meta content="summary_large_image" property="twitter:card"/>
-<meta content="https://www.agroverse.shop/farms/fazenda-analuana-bahia" property="twitter:url"/>
-<meta content="Fazenda Analuana - Regenerative Cacao Farm | Agroverse" property="twitter:title"/>
-<meta content="Regenerative cacao farm in Bahia, Brazil, producing high-quality cacao molasses and supporting sustainable farming practices." property="twitter:description"/>
-<meta content="https://raw.githubusercontent.com/TrueSightDAO/truesight_me/main/assets/shipments/agl5.avif" property="twitter:image"/>
+<meta content="https://www.agroverse.shop/farms/fazenda-clara-bahia" property="twitter:url"/>
+<meta content="Fazenda Clara — Itacaré, Bahia | Agroverse" property="twitter:title"/>
+<meta content="Cabruca cacao farm of Fernando Soller Gimenez & Clara in rural Itacaré, Bahia. Special melon-note cacao nourished with trace seawater minerals. FSVP site-inspection (trees) recorded 10 Sep 2024." property="twitter:description"/>
+<meta content="https://raw.githubusercontent.com/TrueSightDAO/agroverse_shop_beta/main/assets/images/farms/fazenda-clara-bahia-hero.jpg" property="twitter:image"/>
 <!-- Favicon -->
 <link href="../../assets/images/logo/favicon-192x192.jpeg" rel="icon" sizes="192x192" type="image/jpeg"/>
 <link href="../../assets/images/logo/favicon-32x32.jpeg" rel="icon" sizes="32x32" type="image/jpeg"/>
@@ -33,6 +33,7 @@
 <link crossorigin="" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" rel="stylesheet"/>
 <!-- Standardized Cards CSS -->
 <link href="../../css/cards.css" rel="stylesheet"/>
+<link href="../../css/catalog-snippet-cards.css" rel="stylesheet"/>
 <style>
         :root {
             --color-primary: #3b3333;
@@ -110,7 +111,7 @@
             color: white;
             padding: 4rem 2rem;
             background: linear-gradient(135deg, rgba(59, 51, 51, 0.8) 0%, rgba(77, 77, 77, 0.8) 100%),
-                        url('https://raw.githubusercontent.com/TrueSightDAO/truesight_me/main/assets/shipments/agl5.avif') center center/cover;
+                        url('../../assets/images/farms/fazenda-clara-bahia-hero.jpg') center center/cover;
         }
         
         .farm-hero-content h1 {
@@ -183,8 +184,8 @@
             margin-bottom: 0.5rem;
         }
         
-                /* Products/Shipments Grid - Now using cards.css for standard card styling */
-        /* Card styling is standardized in cards.css */
+        /* Shipments & Products Grid - Now using cards.css for standard card styling */
+        /* Card and video styling is standardized in cards.css */
         
         /* Map Section */
         .map-container {
@@ -230,14 +231,17 @@
                 font-size: 36px;
             }
             
+            /* Video responsive styles are in cards.css */
+            
+            body {
+                overflow-x: hidden;
+            }
+            
             .items-grid {
                 grid-template-columns: 1fr;
             }
             
-            .nav-links {
-                gap: 1rem;
-                font-size: 14px;
-            }
+            /* Card responsive styles are in cards.css */
         }
     
         
@@ -276,10 +280,13 @@
         @media (max-width: 768px) {
             .mobile-menu-toggle {
                 display: flex;
-            }
             
+        }
             .nav-links:not(.mobile-menu) {
                 display: none !important;
+            }
+            .nav-links:not(.mobile-menu) {
+                display: none;
             }
             
             .nav-links.mobile-menu {
@@ -354,6 +361,56 @@
             }
         }
         
+        /* Post Navigation */
+        .post-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 3rem 0 2rem;
+            padding: 2rem 0;
+            border-top: 2px solid var(--color-bg-light);
+            border-bottom: 2px solid var(--color-bg-light);
+            gap: 2rem;
+        }
+        
+        .nav-item {
+            flex: 1;
+        }
+        
+        .nav-item.nav-next {
+            text-align: right;
+        }
+        
+        .nav-link {
+            display: inline-block;
+            color: var(--color-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-link:hover {
+            color: var(--color-primary);
+        }
+        
+        @media (max-width: 768px) {
+            .post-navigation {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .nav-item.nav-next {
+                text-align: left;
+            }
+        }
+        
+        
+        .nav-label {
+            font-weight: 600;
+        }
+        
         .back-link {
             display: inline-block;
             margin-top: 2rem;
@@ -369,11 +426,7 @@
         .back-link::before {
             content: '← ';
         }
-        
-        body {
-            overflow-x: hidden;
-        }
-    </style>
+        </style>
 
 <!-- Google Analytics - Only loads on production (www.agroverse.shop) -->
 <script src="../../js/google-analytics.js"></script>
@@ -388,93 +441,64 @@
 <script src="/js/shared-chrome.js"></script>
 <section class="farm-hero">
 <div class="farm-hero-content">
-<h1>Fazenda Analuana</h1>
-<p>Bahia, Brazil • Regenerative Cacao Farm</p>
+<h1>Fazenda Clara</h1>
+<p>Itacaré, Bahia, Brazil • Fernando Soller Gimenez &amp; Clara • Black King supplier</p>
 </div>
 </section>
 <section class="content-section">
 <h2>The Farm Story</h2>
 <div class="farm-story">
-<p>Fazenda Analuana, operated by Ana Luana, is a regenerative cacao farm in Bahia, Brazil, dedicated to sustainable farming practices and producing high-quality cacao products. The farm represents the commitment of small-scale farmers to regenerative agriculture and the production of unique cacao products like cacao molasses.</p>
-<p>Ana Luana's farm specializes in producing cacao molasses—a unique product that showcases the versatility of cacao beyond traditional beans and nibs. This innovative product demonstrates the farm's commitment to value-added processing and creating sustainable livelihoods through regenerative cacao farming.</p>
-<p>Through regenerative practices, Fazenda Analuana contributes to the restoration and preservation of Bahia's agricultural landscape while producing exceptional cacao products. The farm's work supports both environmental sustainability and economic viability for small-scale farmers in the region.</p>
-<p>Fazenda Analuana's partnership with Agroverse through shipments AGL5 and AGL7 demonstrates the farm's commitment to transparency, quality, and sustainable production. These shipments of cacao molasses represent the farm's innovative approach to cacao processing and their role in supporting regenerative agriculture in Bahia.</p>
-</div>
-<div class="farm-highlights">
+<p>Fazenda Clara is the cabruca cacao farm of Fernando Soller Gimenez and his wife Clara, in the rural cacao country around Itacaré on Brazil's southern Bahia coast. Black King visited on 10 September 2024 — a day that started in the cabruca shade and ended with cacao being tasted straight off the tree.</p>
+<p>The trees carry a flavour that Fernando insists on sharing with everyone who visits. “It has something of melon, for sure” — chefs use this cacao like the secret spice of a recipe, and nearly a hectare of the farm is planted to it. Tasting it on the land, the reaction is always the same: “Ele é muito delicioso!”</p>
+<p>Fernando explains the farming with visible pride: a dilute mix of seawater minerals — which carry every mineral that exists — fed to the trees alongside nitrogen, pushing the cacao to produce more of what makes it special. The farm was site-inspected under Black King's FSVP programme on 10 September 2024 (cacao trees; inspection record on file).</p>
+</div><div class="farm-highlights">
 <h3>Farm Highlights</h3>
 <div class="highlights-grid">
 <div class="highlight-item">
-<strong>🌿 Practice</strong>
-                    Regenerative agriculture
+<strong>🌿 Farming</strong>
+                    Cabruca cacao under native shade
                 </div>
 <div class="highlight-item">
-<strong>🍯 Specialty</strong>
-                    Cacao molasses
+<strong>🍈 Flavour</strong>
+                    Melon-note cacao (“like a cantaloupe”)
+                </div>
+<div class="highlight-item">
+<strong>🌊 Technique</strong>
+                    Trace seawater minerals + nitrogen feeding
+                </div>
+<div class="highlight-item">
+<strong>👩‍🌾 Farmers</strong>
+                    Fernando Soller Gimenez &amp; Clara
                 </div>
 <div class="highlight-item">
 <strong>📍 Location</strong>
-                    Bahia, Brazil
+                    Rural Itacaré, Bahia, Brazil
                 </div>
 <div class="highlight-item">
-<strong>👩‍🌾 Farmer</strong>
-                    Ana Luana
+<strong>📋 FSVP</strong>
+                    Site-inspected 10 Sep 2024 (trees)
                 </div>
 <div class="highlight-item">
-<strong>🌱 Impact</strong>
-                    Sustainable farming
-                </div>
-<div class="highlight-item">
-<strong>📱 Social Media</strong>
-                    <a href="https://www.instagram.com/fazendaanaluana/" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: underline;">@fazendaanaluana</a>
+<strong>🗺 Plot</strong>
+                    FC-P1 — 1.75 ha on the SunMint map (proposed)
                 </div>
 </div>
-</div>
-</section>
-<section class="content-section" style="background-color: var(--color-bg-light);">
-<h2>Verified &amp; Traceable</h2>
-<p style="font-size: 18px; line-height: 1.8; max-width: 860px;">This farm&rsquo;s cacao ships through <a href="https://github.com/TrueSightDAO/fda_fsvp/tree/main/suppliers/coopercabruca" style="color: var(--color-primary); text-decoration: underline;" target="_blank" rel="noopener noreferrer">Coopercabruca</a>, an FDA-FSVP-verified supplier. Our site visit is documented and on public record &mdash; see the signed visit report and the supplier&rsquo;s FSVP file (FDA registration, written assurance, supplier evaluation).</p>
-<p style="margin-top: 0.75rem;"><a class="item-link" href="https://github.com/TrueSightDAO/fda_fsvp/blob/main/suppliers/coopercabruca/20240802_Coopercabruca_site_visit_Analuana_farm.pdf" style="color: var(--color-primary); font-weight: 600; display: inline-block;" target="_blank" rel="noopener noreferrer">View the site-visit report (PDF)</a> &nbsp;|&nbsp; <a class="item-link" href="https://github.com/TrueSightDAO/fda_fsvp/tree/main/suppliers/coopercabruca" style="color: var(--color-primary); display: inline-block;" target="_blank" rel="noopener noreferrer">Coopercabruca supplier file</a></p>
-</section>
-<section class="content-section" style="background-color: var(--color-bg-light);">
-<h2>Shipments from This Farm</h2>
-<div class="items-grid">
-<div class="item-card">
-<img alt="AGL5 Shipment" class="item-card-image" onerror="this.src='../../assets/images/hero/cacao-circles-alt.jpg'; this.onerror=null;" src="https://raw.githubusercontent.com/TrueSightDAO/truesight_me/main/assets/shipments/agl5.avif"/>
-<div class="item-card-body">
-<h3>AGL5</h3>
-<div class="item-meta">37.5 kg (30 bottles of 250g) • Cacao Molasses</div>
-<div class="item-links">
-<a class="item-link" href="../../shipments/agl5/index.html">View Shipment</a>
-<a class="item-link" href="https://www.truesight.me/agroverse-shipments/agl5" rel="noopener noreferrer" target="_blank">View Ledger</a>
-</div>
-</div>
-</div>
-<div class="item-card">
-<img alt="AGL7 Shipment" class="item-card-image" onerror="this.src='../../assets/images/hero/cacao-circles-alt.jpg'; this.onerror=null;" src="https://raw.githubusercontent.com/TrueSightDAO/truesight_me/main/assets/shipments/agl7.gif"/>
-<div class="item-card-body">
-<h3>AGL7</h3>
-<div class="item-meta">25 kg (20 bottles of 250g) • Cacao Molasses</div>
-<div class="item-links">
-<a class="item-link" href="../../shipments/agl7/index.html">View Shipment</a>
-<a class="item-link" href="https://www.truesight.me/agroverse-shipments/agl7" rel="noopener noreferrer" target="_blank">View Ledger</a>
-</div>
-</div>
-</div>
-</div>
+</div><!-- Videos Container - Side by Side on Desktop (JSON-driven via media-gallery.js) -->
+<div class="farm-videos-container" id="media-gallery"></div>
 </section>
 <section class="content-section" style="background-color: var(--color-bg-light);">
 <h2>Farm Location</h2>
-<div class="map-container" id="map-analuana"></div>
-<p style="margin-top: 1rem;"><a class="item-link" href="https://www.google.com/maps/place/Fazenda+Analuana/@-15.691646,-39.295703,17z/data=!3m1!4b1!4m6!3m5!1s0x7370acb6be9166f:0xec6f6e4a9f37a4ef!8m2!3d-15.691646!4d-39.295703!16s%2Fg%2F11fx9cmz2m!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MTEyMy4xIKXMDSoASAFQAw%3D%3D" rel="noreferrer" style="display: inline-block;" target="_blank">View on Google Maps</a></p>
+<div class="map-container" id="map-fc"></div>
+<p style="margin-top: 1rem;"><a class="item-link" href="https://www.google.com/maps/search/?api=1&query=-14.4625,-39.1317" rel="noreferrer" style="display: inline-block;" target="_blank">View on Google Maps</a></p>
 </section>
 <div class="farm-navigation" id="farm-navigation"></div>
 <a class="back-link" href="../../cacao-journeys/brazilian-path/index.html">Back to Journey</a><div id="site-footer"></div>
 <script crossorigin="" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-        // Initialize map for Fazenda Analuana coordinates from Google Maps
+        // Initialize map for Bahia, Brazil
         (function() {
             function initMap() {
-                const mapElement = document.getElementById('map-analuana');
+                const mapElement = document.getElementById('map-fc');
                 if (!mapElement) {
                     setTimeout(initMap, 100);
                     return;
@@ -484,14 +508,17 @@
                     return;
                 }
                 try {
-                    const mapAnaluana = L.map('map-analuana').setView([-15.691646, -39.295703], 13);
+                    const mapFc = L.map('map-fc').setView([-14.4625, -39.1317], 12);
                     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
                         maxZoom: 19
-                    }).addTo(mapAnaluana);
-                    L.marker([-15.691646, -39.295703]).addTo(mapAnaluana)
-                        .bindPopup('Fazenda Analuana<br>Bahia, Brazil<br><a href="https://www.google.com/maps/place/Fazenda+Analuana/@-15.691646,-39.295703,17z/data=!3m1!4b1!4m6!3m5!1s0x7370acb6be9166f:0xec6f6e4a9f37a4ef!8m2!3d-15.691646!4d-39.295703!16s%2Fg%2F11fx9cmz2m!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MTEyMy4xIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noreferrer">View on Google Maps</a>')
+                    }).addTo(mapFc);
+                    L.marker([-14.4625, -39.1317]).addTo(mapFc)
+                        .bindPopup('Fazenda Clara<br>Itacaré, Bahia, Brazil<br><a href="https://www.google.com/maps/place/14%C2%B003\'09.5%22S+39%C2%B026\'17.5%22W/@-14.052624,-39.438206,13z/data=!4m4!3m3!8m2!3d-14.052624!4d-39.438206?entry=ttu" target="_blank" rel="noreferrer">View on Google Maps</a>')
                         .openPopup();
+                    // FC-P1 approx hull from media GPS (10 Sep 2024 site visit, proposed)
+                    const fcP1 = [[-14.4636,-39.1324],[-14.4638,-39.132],[-14.4638,-39.1317],[-14.4612,-39.1309],[-14.4611,-39.1309],[-14.4611,-39.1312],[-14.4636,-39.1324]];
+                    L.polygon(fcP1,{color:'#b8860b',weight:2,fillOpacity:0.15}).addTo(mapFc).bindPopup('FC-P1 \u2014 Fazenda Clara plot (approx hull from media GPS, proposed)');
                 } catch (error) {
                     console.error('Error initializing map:', error);
                 }
@@ -503,13 +530,6 @@
             }
         })();
     </script>
-<script src="../../js/config.js"></script>
-<script src="../../js/farms-data.js"></script>
-<script src="../../js/partners-data.js"></script>
-<script src="../../js/brazilian-path-data.js"></script>
-<script src="../../js/drift-navigation.js"></script>
-<script src="../../js/farm-navigation.js"></script>
-<link href="../../css/journey-navigation.css" rel="stylesheet"/>
 <div class="mobile-menu-overlay"></div><script>
     document.addEventListener('DOMContentLoaded', function() {
         const menuToggle = document.querySelector('.mobile-menu-toggle');
@@ -571,9 +591,23 @@
             });
         }
     });
-</script>
+    </script>
+<script src="../../js/media-gallery.js"></script>
+<script src="../../js/config.js"></script>
+<script src="../../js/farms-data.js"></script>
+<script src="../../js/partners-data.js"></script>
+<script src="../../js/brazilian-path-data.js"></script>
+<script src="../../js/drift-navigation.js"></script>
+<script src="../../js/farm-navigation.js"></script>
+<link href="../../css/farm-navigation.css" rel="stylesheet"/>
+<script src="../../js/universal-nav.js"></script>
+<script src="../../js/products.js"></script>
+<script src="../../js/inventory-service.js"></script>
+<script src="../../js/catalog-snippet-upgrade.js"></script>
+<script src="../../js/inventory-display.js"></script>
+<script src="../../js/cart.js"></script>
+<script src="../../js/cart-ui.js"></script>
+<script src="../../js/add-to-cart.js"></script>
+<link href="../../css/cart.css" rel="stylesheet"/>
 </body>
 </html>
-
-
-
