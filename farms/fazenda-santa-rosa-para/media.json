@@ -174,8 +174,24 @@
     },
     {
       "type": "image",
+      "src": "../../assets/images/farms/fazenda-santa-rosa-IMG_8328.jpg",
+      "caption": "Fazenda Santa Rosa \u2014 fermentation station, Uruar\u00e1. Site walk 03 Sep 2026."
+    },
+    {
+      "type": "image",
+      "src": "../../assets/images/farms/fazenda-santa-rosa-IMG_8327.jpg",
+      "caption": "Fazenda Santa Rosa \u2014 drying station, Uruar\u00e1. Site walk 03 Sep 2026."
+    },
+    {
+      "type": "image",
       "src": "../../assets/images/farms/fazenda-santa-rosa-IMG_8325.jpg",
       "caption": "Fazenda Santa Rosa — plot U-06-06. Site walk 03 Sep 2026."
+    },
+    {
+      "type": "image",
+      "src": "../../assets/images/farms/fazenda-santa-rosa-IMG_8322.jpg",
+      "aspect": "portrait",
+      "caption": "Fazenda Santa Rosa \u2014 fruit harvesting, plot U-06-06. Site walk 03 Sep 2026."
     },
     {
       "type": "image",
