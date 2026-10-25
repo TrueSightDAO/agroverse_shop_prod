@@ -26,7 +26,7 @@ window.PRODUCTS = {
     // URL path under /product-page/ (must match folder name; id may differ for Stripe/SKU)
     productPageSlug: 'ceremonial-cacao-paulo-s-la-do-sitio-farm-2024-200g',
     name: 'Ceremonial Cacao – La do Sitio Farm, Pará Brazil, 2024 (200g)',
-    price: 25.00,
+    price: 30.00,
     weight: 7.05, // 200g = ~7.05 oz (for shipping calculation)
     image: '/assets/images/products/la-do-sitio-farm.jpg',
     stripePriceId: '', // Not needed - using price_data instead
@@ -177,6 +177,21 @@ window.PRODUCTS = {
     category: 'retail',
     shipment: 'AGL4',
     farm: 'Fazenda São Jorge, Bahia',
+    gtin: '00860010660256',
+    relatedFamily: 'bar-81-50g'
+  },
+
+  'organic-81-dark-chocolate-bar-50g-vivi-jesus-do-deus-bahia-2025': {
+    productId: 'organic-81-dark-chocolate-bar-50g-vivi-jesus-do-deus-bahia-2025',
+    productPageSlug: 'organic-81-dark-chocolate-bar-50g-vivi-jesus-do-deus-bahia-2025',
+    name: "81% Organic Dark Chocolate Bar (50g) \u2014 Vivi's Farm, Bahia Brazil, 2025",
+    price: 10.00,
+    weight: 1.76, // 50g \u2248 1.76 oz (shipping calculation)
+    image: '/assets/images/products/81-dark-chocolate-bar-50g-packaging.jpg',
+    stripePriceId: '',
+    category: 'retail',
+    shipment: 'AGL13',
+    farm: "Vivi's Farm (Jesus Do Deus), Itacar\u00e9, Bahia",
     gtin: '00860010660256',
     relatedFamily: 'bar-81-50g'
   },
