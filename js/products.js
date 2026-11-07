@@ -279,3 +279,30 @@ window.PRODUCTS['custom-white-label-chocolate-bar-50g'] = {
   gtin: '00860010660256',
   subscribable: false
 };
+
+/**
+ * Cacao Mass Bar (500g) – Oscar's Farm, Bahia Brazil, 2024
+ * Backed by ledger currency:
+ * 'Cacao Mass Bar (500grams) - Ilheus, Brazil 2024 + 047-3175-3223 - San Francisco'
+ * Landed via TAP air freight AWB 047-3175-3223 / shipment AGL4 (ledger MAIN).
+ * The 2024 Correios lot (CP340993299BR, 40 bars) is SOLD OUT; this batch is the
+ * TAP air-freight lot — 37 bars held by Kirsten Ritschel per 'offchain asset location'.
+ *
+ * DO NOT hardcode a stock count into pages. This site has no inventory feed
+ * (js/store-inventory.json and js/skus.json both 404), so any number written into
+ * markup goes stale on the first sale. 37 is the ledger figure, stated here only
+ * as a reference for whoever wires up real stock display.
+ *
+ * NOTE: no GTIN assigned yet — see PRODUCT_DEVELOPMENT_SPECS.md (reuse, never mint).
+ */
+window.PRODUCTS['cacao-mass-bar-500g-ilheus-2024'] = {
+  productId: 'cacao-mass-bar-500g-ilheus-2024',
+  productPageSlug: 'cacao-mass-bar-500g',
+  name: "Cacao Mass Bar (500g) – Oscar's Farm, Bahia Brazil, 2024",
+  price: 60.00,
+  weight: 17.64,
+  image: '/assets/images/products/cacao-mass-bar-500g-1.jpeg',
+  category: 'retail',
+  relatedFamily: 'cacao-mass',
+  subscribable: false
+};
